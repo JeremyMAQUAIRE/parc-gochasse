@@ -1,0 +1,15 @@
+.dialogCreatePrestation-input .react-datepicker__time{
+  height: 12em;
+  overflow: hidden;
+}
+
+.dialogCreatePrestation-input .react-datepicker__time-container,
+.dialogCreatePrestation-input .react-datepicker__time-box,
+.dialogCreatePrestation-input .react-datepicker__time-list {
+  width: 15em!important;
+  scrollbar-width: none;
+}
+
+.dialogCreatePrestation-input .react-datepicker__time-list-item--selected {
+  background-color: #16A34A!important;
+}

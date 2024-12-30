@@ -1,0 +1,90 @@
+// Custom FullCalendar -- Start
+.fc-direction-ltr {
+  height: 800px;
+}
+
+.fc .fc-timegrid-col.fc-day-today {
+  background-color: transparent;
+}
+
+.fc-scrollgrid {
+  background-color: gainsboro;
+}
+
+.fc-event {
+  border-radius: 25px!important;
+}
+
+.fc-event-main {
+  overflow: hidden;
+}
+
+.fc-toolbar-chunk {
+  display: flex;
+  align-items: center;
+}
+
+.fc-direction-ltr .fc-timegrid-col-events {
+  width: 99%;
+  margin: auto;
+}
+
+.fc .fc-button-primary {
+  color: white;
+  background-color: #16A34A;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+  background-color: gainsboro;
+  color: #16A34A!important;
+}
+
+.fc .fc-button-primary:hover {
+  background-color: transparent;
+  color: #16A34A;
+}
+
+.fc .fc-button-primary:disabled {
+  background-color: gainsboro;
+  color: #16A34A;
+  opacity: 1;
+}
+
+.fc .fc-timegrid-now-indicator-line {
+  border-color: #16A34A
+}
+
+.fc .fc-timegrid-now-indicator-arrow {
+  border-color: #16A34A;
+}
+
+.fc-direction-ltr .fc-timegrid-now-indicator-arrow {
+  border-bottom-color: transparent;
+  border-top-color: transparent;
+  border-width: 5px 0px 5px 6px;
+  left: 0px;
+}
+
+.fc-direction-ltr .fc-timegrid-slot-label-frame {
+  text-align: center;
+}
+
+.fc .fc-timegrid-axis-cushion {
+  color: #16A34A;
+  font-weight: 700;
+}
+
+.fc-theme-standard td, .fc-theme-standard th {
+  border: 1px solid gray;
+}
+
+.fc-theme-standard .fc-scrollgrid {
+  border: 1px solid gray;
+}
+
+.fc-event{
+  background-color: transparent;
+  border: none;
+  box-shadow: none!important;
+}
+// Custom FullCalendar -- End
