@@ -11,8 +11,6 @@ import AdminSocieteConsigne from './AdminSociete/AdminSocieteConsigne/AdminSocie
 import AdminStatMessageRevenu from './AdminStatMessage/AdminStatMessageRevenu/AdminStatMessageRevenu';
 import AdminStatMessageMail from './AdminStatMessage/AdminStatMessageMail/AdminStatMessageMail';
 import AdminAgendaPrestation from './AdminAgenda/AdminAgendaPrestation/AdminAgendaPrestation';
-import AdminDocument from './AdminDocument/AdminDocument/AdminDocument';
-import AdminCartes from './AdminDocument/AdminCardHunter/AdminCartes';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -37,8 +35,6 @@ const Admin = () => {
         {link.menuAdmin === 'consigne' && <AdminSocieteConsigne />}
         {link.menuAdmin === 'chiffre-affaire' && <AdminStatMessageRevenu />}
         {link.menuAdmin === 'email' && <AdminStatMessageMail />}
-        {link.menuAdmin === 'documents' && <AdminDocument />}
-        {link.menuAdmin === 'cartes' && <AdminCartes />}
       </div>
     </div>
   );

@@ -31,31 +31,31 @@
 
 .fc .fc-button-primary {
   color: white;
-  background-color: #16A34A;
+  background-color: #5C3117;
 }
 
 .fc .fc-button-primary:not(:disabled).fc-button-active {
   background-color: gainsboro;
-  color: #16A34A!important;
+  color: #5C3117!important;
 }
 
 .fc .fc-button-primary:hover {
   background-color: transparent;
-  color: #16A34A;
+  color: #5C3117;
 }
 
 .fc .fc-button-primary:disabled {
   background-color: gainsboro;
-  color: #16A34A;
+  color: #5C3117;
   opacity: 1;
 }
 
 .fc .fc-timegrid-now-indicator-line {
-  border-color: #16A34A
+  border-color: #5C3117
 }
 
 .fc .fc-timegrid-now-indicator-arrow {
-  border-color: #16A34A;
+  border-color: #5C3117;
 }
 
 .fc-direction-ltr .fc-timegrid-now-indicator-arrow {
@@ -70,7 +70,7 @@
 }
 
 .fc .fc-timegrid-axis-cushion {
-  color: #16A34A;
+  color: #5C3117;
   font-weight: 700;
 }
 

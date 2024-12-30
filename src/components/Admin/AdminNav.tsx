@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Calendar, ChevronDown, ChevronRight, File, Mail, Settings } from 'react-feather';
+import { Calendar, ChevronDown, ChevronRight, Mail, Settings } from 'react-feather';
 import { NavLink, useLocation } from 'react-router-dom';
 import AdminNavEvents from './AdminNavEvents';
 import AdminNavPhotos from './AdminNavPhotos';
@@ -215,55 +215,6 @@ const AdminNav = () => {
                 }
               >
                 - Notification par Email
-              </NavLink>
-            </ul>
-          </div>
-        </div>
-
-        {/* Section 4 */}
-        <div className="border-b-[1px] border-black">
-          <div
-            className="cursor-pointer flex items-center gap-4"
-            onClick={() => toggleAccordion('section4')}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                toggleAccordion('section3');
-              }
-            }}
-          >
-            <div className="flex justify-between w-full h-full">
-              <div className="flex items-center h-16 gap-2 p-4 w-4/5">
-                {openSections.section4 ? <ChevronDown /> : <ChevronRight />}
-                <h3 className={openSections.section4 ? 'text-base font-semibold' : 'text-base font-normal'}>Cartes de chasse et document(s)</h3>
-              </div>
-              <div className="bg-[#191919] w-16 h-16 p-4 flex justify-center items-center">
-                <File className={openSections.section4 ? 'text-brown' : 'text-white'} />
-              </div>
-            </div>
-          </div>
-          <div className={`overflow-hidden transition-all duration-300 ease-linear ${openSections.section4 ? 'h-24' : 'h-0'}`}>
-            <ul>
-              <NavLink
-                to="cartes"
-                className={({ isActive }) =>
-                  isActive
-                    ? 'h-12 pl-16 text-brown font-semibold flex items-center justify-between after:w-16 after:h-full after:bg-[#191919]'
-                    : 'h-12 pl-16 flex items-center justify-between after:w-16 after:h-full after:bg-[#191919]'
-                }
-              >
-                - Cartes de chasse
-              </NavLink>
-              <NavLink
-                to="documents"
-                className={({ isActive }) =>
-                  isActive
-                    ? 'h-12 pl-16 text-brown font-semibold flex items-center justify-between after:w-16 after:h-full after:bg-[#191919]'
-                    : 'h-12 pl-16 flex items-center justify-between after:w-16 after:h-full after:bg-[#191919]'
-                }
-              >
-                - Autres documents
               </NavLink>
             </ul>
           </div>

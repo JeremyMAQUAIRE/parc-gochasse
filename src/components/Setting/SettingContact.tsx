@@ -44,7 +44,7 @@ const SendSuccess = ({ show, setShow }: SendSuccessProps) => {
                       onClick={() => {
                         setShow(false);
                       }}
-                      className="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-brown focus:ring-offset-2"
                     >
                       <span className="sr-only">Close</span>
                       <XMarkIcon aria-hidden="true" className="size-5" />
@@ -171,7 +171,7 @@ const SettingContact = () => {
                     setShow(true);
                     dispatch(actionResetContactState());
                   }}
-                  className="block w-full rounded-md bg-brown px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50"
+                  className="block w-full rounded-md bg-brown px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-brown focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50"
                 >
                   Envoyer votre demande
                 </button>
