@@ -66,7 +66,7 @@ const AdminNav = () => {
               </div>
             </div>
           </div>
-          <div className={`overflow-hidden transition-all duration-300 ease-linear ${openSections.section1 ? 'h-24' : 'h-0'}`}>
+          <div className={`overflow-hidden transition-all duration-300 ease-linear ${openSections.section1 ? 'h-36' : 'h-0'}`}>
             <ul>
               <NavLink
                 to="prestations"
@@ -87,6 +87,16 @@ const AdminNav = () => {
                 }
               >
                 - Gérer les évènements
+              </NavLink>
+              <NavLink
+                to="parcs"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'h-12 pl-16 text-brown font-semibold flex items-center justify-between after:w-16 after:h-full after:bg-[#191919]'
+                    : 'h-12 pl-16 flex items-center justify-between after:w-16 after:h-full after:bg-[#191919]'
+                }
+              >
+                - Gérer les parcs
               </NavLink>
             </ul>
           </div>

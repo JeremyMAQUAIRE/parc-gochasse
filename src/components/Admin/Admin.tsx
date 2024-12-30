@@ -11,6 +11,7 @@ import AdminSocieteConsigne from './AdminSociete/AdminSocieteConsigne/AdminSocie
 import AdminStatMessageRevenu from './AdminStatMessage/AdminStatMessageRevenu/AdminStatMessageRevenu';
 import AdminStatMessageMail from './AdminStatMessage/AdminStatMessageMail/AdminStatMessageMail';
 import AdminAgendaPrestation from './AdminAgenda/AdminAgendaPrestation/AdminAgendaPrestation';
+import AdminAgendaParc from './AdminAgenda/AdminAgendaParc/AdminAgendaParc';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const Admin = () => {
       <div className="flex-1">
         {link.menuAdmin === 'prestations' && <AdminAgendaPrestation />}
         {link.menuAdmin === 'evenements' && <AdminAgendaEvenement />}
+        {link.menuAdmin === 'parcs' && <AdminAgendaParc />}
         {link.menuAdmin === 'photos' && <AdminSocietePhoto />}
         {link.menuAdmin === 'description' && <AdminSocieteDescription />}
         {link.menuAdmin === 'notification' && <AdminSocieteNotification />}
