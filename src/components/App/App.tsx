@@ -34,7 +34,7 @@ function App() {
       } else if (isDesktop) {
         // On desktop, landscape will depend on orientation
         const isLandscapeMode = window.matchMedia('(orientation: landscape)').matches;
-        setIsLandscape(isLandscapeMode);
+        setIsLandscape(!isLandscapeMode);
       }
     };
 
@@ -60,8 +60,8 @@ function App() {
 
   return (
     <div className="bg-[#EAEAEA] h-screen">
-      {!isLandscape && <BadResolution />}
-      {isLandscape && (
+      {isLandscape && <BadResolution />}
+      {!isLandscape && (
         <>
           {location.pathname !== '/' && location.pathname !== '/login' && <Header />}
           <Routes>
