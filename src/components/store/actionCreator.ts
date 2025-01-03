@@ -102,6 +102,9 @@ export const actionClickDialogDeleteMember = createAction<boolean>('@dialog/CLIC
 export const actionClickDialogInfoMember = createAction<boolean>('@dialog/CLICK_DIALOG_INFO_MEMBER');
 export const actionClickDialogDeleteVisitor = createAction<boolean>('@dialog/CLICK_DIALOG_DELETE_VISITOR');
 export const actionClickDialogDeleteDocument = createAction<boolean>('@dialog/CLICK_DIALOG_DELETE_DOCUMENT');
+export const actionClickDialogCreateParc = createAction<boolean>('@dialog/CLICK_DIALOG_CREATE_PARC');
+export const actionClickDialogUpdateParc = createAction<boolean>('@dialog/CLICK_DIALOG_UPDATE_PARC');
+export const actionClickDialogDeleteParc = createAction<boolean>('@dialog/CLICK_DIALOG_DELETE_PARC');
 
 // management of category
 export const actionResetCategoryState = createAction('@category/RESET_CATEGORY_STATE');
@@ -164,3 +167,9 @@ export const actionChangeUserListVisitor = createAction<IUserMember[]>('@listUse
 // management of list Document
 export const actionChangeUserListCard = createAction<ICardUser[]>('@listUser/CHANGE_USER_LIST_CARD');
 export const actionChangeUserListDocument = createAction<ICardUser[]>('@listUser/CHANGE_USER_LIST_DOCUMENT');
+
+// management of parc
+export const actionChangeGestionParcTitle = createAction<string>('@gestion_parc/CHANGE_GESTION_PARC_TITLE');
+export const actionChangeGestionParcId = createAction<number>('@gestion_parc/CHANGE_GESTION_PARC_ID');
+export const actionChangeGestionParcData = createAction<[]>('@gestion_parc/CHANGE_GESTION_PARC_DATA');
+export const actionCleanGestionParc = createAction('@gestion_parc/CLEAN_GESTION_PARC');

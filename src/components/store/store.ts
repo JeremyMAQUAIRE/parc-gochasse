@@ -12,6 +12,7 @@ import revenueReducer from './reducer/revenueReducer';
 import contactReducer from './reducer/contactReducer';
 import ListUserReducer from './reducer/ListUserReducer';
 import ListDocument from './reducer/ListDocument';
+import parcReducer from './reducer/parcReducer';
 // eslint-disable-next-line import/no-cycle
 
 // Configuration de redux-persist
@@ -31,6 +32,7 @@ const rootReducer = {
   contactReducer: contactReducer,
   ListUserReducer: ListUserReducer,
   ListDocument: ListDocument,
+  parcReducer: parcReducer,
 };
 
 const persistedReducer = persistReducer(persistConfig, combineReducers(rootReducer));

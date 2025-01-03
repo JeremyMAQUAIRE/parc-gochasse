@@ -4,18 +4,21 @@ import {
   actionClickDialogCreateCategory,
   actionClickDialogCreateEvent,
   actionClickDialogCreateNotificationMail,
+  actionClickDialogCreateParc,
   actionClickDialogCreatePrestation,
   actionClickDialogDeleteCategory,
   actionClickDialogDeleteDocument,
   actionClickDialogDeleteEvent,
   actionClickDialogDeleteMember,
   actionClickDialogDeleteNotificationMail,
+  actionClickDialogDeleteParc,
   actionClickDialogDeletePrestation,
   actionClickDialogDeleteVisitor,
   actionClickDialogInfoMember,
   actionClickDialogNewUserInTheTeam,
   actionClickDialogUpdateCategory,
   actionClickDialogUpdateEvent,
+  actionClickDialogUpdateParc,
   actionClickDialogUpdatePrestation,
 } from '../actionCreator';
 
@@ -36,6 +39,9 @@ const initialState = {
   dialogInfoMember: false,
   dialogDeleteVisitor: false,
   dialogDeleteDocument: false,
+  dialogCreateParc: false,
+  dialogUpdateParc: false,
+  dialogDeleteParc: false,
 };
 
 const dialogReducer = createReducer(initialState, (builder) => {
@@ -87,6 +93,15 @@ const dialogReducer = createReducer(initialState, (builder) => {
     })
     .addCase(actionClickDialogDeleteDocument, (state, action) => {
       state.dialogDeleteDocument = action.payload;
+    })
+    .addCase(actionClickDialogCreateParc, (state, action) => {
+      state.dialogCreateParc = action.payload;
+    })
+    .addCase(actionClickDialogUpdateParc, (state, action) => {
+      state.dialogUpdateParc = action.payload;
+    })
+    .addCase(actionClickDialogDeleteParc, (state, action) => {
+      state.dialogDeleteParc = action.payload;
     });
 });
 export default dialogReducer;
