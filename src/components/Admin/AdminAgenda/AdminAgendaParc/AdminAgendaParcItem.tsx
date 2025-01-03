@@ -3,7 +3,12 @@ import { useDispatch } from 'react-redux';
 
 import { AppDispatch } from '../../../store/store';
 import IParc from '../../../../@types/parc';
-import { actionChangeGestionParcId, actionChangeGestionParcTitle, actionClickDialogDeleteParc } from '../../../store/actionCreator';
+import {
+  actionChangeGestionParcId,
+  actionChangeGestionParcTitle,
+  actionClickDialogDeleteParc,
+  actionClickDialogUpdateParc,
+} from '../../../store/actionCreator';
 
 const AdminAgendaParcItem = ({ parc }: { parc: IParc }) => {
   const dispatch: AppDispatch = useDispatch();
@@ -13,7 +18,15 @@ const AdminAgendaParcItem = ({ parc }: { parc: IParc }) => {
       <header className="flex justify-between items-center h-14 mx-4">
         <h2 className="text-white text-xl font-bold">{parc.name}</h2>
         <div className="flex gap-3">
-          <Edit3 className="bg-black rounded-full p-2 h-10 w-10 text-white hover:bg-white hover:text-black" style={{ border: '1px solid black' }} />
+          <Edit3
+            className="bg-black rounded-full p-2 h-10 w-10 text-white hover:bg-white hover:text-black"
+            style={{ border: '1px solid black' }}
+            onClick={() => {
+              dispatch(actionChangeGestionParcTitle(parc.name));
+              dispatch(actionChangeGestionParcId(parc.id));
+              dispatch(actionClickDialogUpdateParc(true));
+            }}
+          />
           <button type="button">
             <Trash2
               onClick={() => {

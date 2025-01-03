@@ -9,6 +9,7 @@ import readAllGestionParcByUser from '../../../../api/directus/parc/readAllGesti
 import IParc from '../../../../@types/parc';
 import AdminAgendaParcItem from './AdminAgendaParcItem';
 import DialogDeleteParc from './DialogDeleteParc';
+import DialogUpdateParc from './DialogUpdateParc';
 
 const AdminAgendaParc = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -45,6 +46,7 @@ const AdminAgendaParc = () => {
 
       {dialogOpen.dialogCreateParc && <DialogCreateParc />}
       {dialogOpen.dialogDeleteParc && <DialogDeleteParc />}
+      {dialogOpen.dialogUpdateParc && <DialogUpdateParc />}
     </div>
   );
 };
