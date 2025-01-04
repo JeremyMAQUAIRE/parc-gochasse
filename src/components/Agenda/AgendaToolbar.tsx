@@ -2,15 +2,17 @@ import { List, Plus } from 'react-feather';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { fr } from 'date-fns/locale/fr';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import AgendaTime from './AgendaTime';
 import calendar from '../../../public/calendar.webp';
 import DialogCreateEvent from '../Admin/AdminAgenda/AdminAgendaEvenement/DialogCreateEvent';
 import { AppDispatch, RootState } from '../store/store';
 import { actionClickDialogCreateEvent } from '../store/actionCreator';
+import IParc from '../../@types/parc';
+import readAllGestionParcByUser from '../../api/directus/parc/readAllGestionParcByUser';
 
 registerLocale('fr', fr);
 setDefaultLocale('fr');
@@ -19,6 +21,7 @@ const AgendaToolbar = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const dialogOpen = useSelector((state: RootState) => state.dialogReducer);
+  const parcs: IParc[] = useSelector((state: RootState) => state.parcReducer.data);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [dateSelected, setdateSelected] = useState<Date>(new Date());
 
@@ -37,6 +40,10 @@ const AgendaToolbar = () => {
       window.location.reload();
     }
   };
+
+  useEffect(() => {
+    dispatch(readAllGestionParcByUser());
+  }, [dispatch]);
 
   return (
     <section className="h-20 m-auto flex justify-between items-center">
@@ -62,6 +69,29 @@ const AgendaToolbar = () => {
             dateFormat="dd/MM/yyyy"
           />
         )}
+      </div>
+
+      <div className="flex flex-1 justify-center items-center">
+        {parcs.length !== 0 &&
+          parcs.map((parc: IParc, index: number) => (
+            <NavLink
+              key={parc.id}
+              to={`/agenda/${parc.slug}`}
+              className={({ isActive }) => {
+                const baseClass = 'py-3 px-5 font-semibold';
+                const activeClass = isActive ? 'bg-brown text-white' : 'bg-zinc-300';
+                let roundedClass = '';
+                if (index === 0) {
+                  roundedClass = 'rounded-l-lg';
+                } else if (index === parcs.length - 1) {
+                  roundedClass = 'rounded-r-lg';
+                }
+                return `${baseClass} ${activeClass} ${roundedClass}`;
+              }}
+            >
+              {parc.name}
+            </NavLink>
+          ))}
       </div>
 
       <div className="flex items-center gap-2">

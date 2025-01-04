@@ -134,6 +134,7 @@ export const actionChangeEventTitle = createAction<string>('@event/CHANGE_EVENT_
 export const actionChangeEventDate = createAction<string>('@event/CHANGE_EVENT_DATE');
 export const actionChangeEventIdCategory = createAction<number>('@event/CHANGE_EVENT_ID_CATEGORY');
 export const actionChangeEventIdPrestation = createAction<number>('@event/CHANGE_EVENT_ID_PRESTATION');
+export const actionChangeEventIdParc = createAction<number>('@event/CHANGE_EVENT_ID_PARC');
 export const actionChangeEventRecurrence = createAction<boolean>('@event/CHANGE_EVENT_RECURRENCE');
 export const actionChangeEventTimeUnit = createAction<string>('@event/CHANGE_EVENT_TIMEUNIT');
 export const actionChangeEventRepetition = createAction<number>('@event/CHANGE_EVENT_REPETITION');

@@ -67,7 +67,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Home />} />
-            <Route path="agenda" element={<Agenda />} />
+            <Route path="agenda" element={<Agenda />}>
+              <Route path=":parcAgenda" element={<Agenda />} />
+            </Route>
             <Route path="parametres" element={<Setting />}>
               <Route path=":menuSetting" element={<Setting />} />
             </Route>

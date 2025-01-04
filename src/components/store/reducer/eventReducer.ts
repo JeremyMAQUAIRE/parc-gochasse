@@ -7,6 +7,7 @@ import {
   actionChangeEventDate,
   actionChangeEventId,
   actionChangeEventIdCategory,
+  actionChangeEventIdParc,
   actionChangeEventIdPrestation,
   actionChangeEventRecurrence,
   actionChangeEventRepetition,
@@ -21,6 +22,7 @@ const initialState = {
   dateEvent: '',
   idCategory: 0,
   idPrestation: 0,
+  idParc: 0,
   isRecurrent: false,
   timeUnit: 'day',
   repetitionNumber: 0,
@@ -47,6 +49,9 @@ const eventReducer = createReducer(initialState, (builder) => {
     })
     .addCase(actionChangeEventIdPrestation, (state, action) => {
       state.idPrestation = action.payload;
+    })
+    .addCase(actionChangeEventIdParc, (state, action) => {
+      state.idParc = action.payload;
     })
     .addCase(actionChangeEventRecurrence, (state, action) => {
       state.isRecurrent = action.payload;

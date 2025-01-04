@@ -7,6 +7,7 @@ import { AppDispatch, RootState } from '../../../store/store';
 import {
   actionChangeEventDate,
   actionChangeEventIdCategory,
+  actionChangeEventIdParc,
   actionChangeEventIdPrestation,
   actionChangeEventRecurrence,
   actionChangeEventRepetition,
@@ -30,11 +31,14 @@ import readPrestationById from '../../../../api/directus/prestation/readPrestati
 import './DialogCreateEvent.scss';
 import createEvent from '../../../../api/directus/event/createEvent';
 import readAllEventsByUser from '../../../../api/directus/event/readAllEventsByUser';
+import readAllGestionParcByUser from '../../../../api/directus/parc/readAllGestionParcByUser';
+import IParc from '../../../../@types/parc';
 
 const DialogCreateEvent = () => {
   const dispatch: AppDispatch = useDispatch();
   const open = useSelector((state: RootState) => state.dialogReducer.dialogCreateEvent);
   const event = useSelector((state: RootState) => state.eventReducer);
+  const parcs = useSelector((state: RootState) => state.parcReducer.data);
   const categories: ICategory[] = useSelector((state: RootState) => state.categoryReducer.dataCategory);
   const prestationModel = useSelector((state: RootState) => state.prestationReducer);
   const [prestations, setPrestations] = useState<IPrestation[]>([]);
@@ -42,6 +46,7 @@ const DialogCreateEvent = () => {
 
   useEffect(() => {
     dispatch(readCategory());
+    dispatch(readAllGestionParcByUser());
   }, [dispatch]);
 
   useEffect(() => {
@@ -172,6 +177,25 @@ const DialogCreateEvent = () => {
                     {prestations.map((cat) => (
                       <option key={cat.id} value={cat.id}>
                         {cat.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="flex justify-between items-center mt-4">
+                  <label htmlFor="prestation" className="text-lg font-medium text-gray-900">
+                    Parc <span className="text-brown font-bold pl-1">*</span>
+                  </label>
+                  <select
+                    id="prestation"
+                    name="location"
+                    defaultValue=""
+                    onChange={(e) => dispatch(actionChangeEventIdParc(parseInt(e.target.value, 10)))}
+                    className="flex w-[550px] py-1.5 pl-3 pr-3 text-base text-gray-900 placeholder:text-gray-400 bg-white focus:outline-none border border-gray-300 rounded-md focus:border-brown disabled:bg-gray-200"
+                  >
+                    <option value="">Choisir un parc</option>
+                    {parcs.map((parc: IParc) => (
+                      <option key={parc.id} value={parc.id}>
+                        {parc.name}
                       </option>
                     ))}
                   </select>

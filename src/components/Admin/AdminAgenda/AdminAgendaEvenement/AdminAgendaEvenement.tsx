@@ -116,14 +116,17 @@ const AdminAgendaEvenement = () => {
                 }}
               >
                 <div className="flex items-center justify-between mt-2">
-                  <div className="flex items-center">
-                    <p className="font-bold">{event.id_prestation.title}</p>
-                    <p className="text-brown font-semibold pl-2">{formatDateEvent(event.date_event)}</p>
-                    <p className="text-zinc-500/75 font-semibold pl-2">
-                      {event.start_time_event}/{event.end_time_event}
-                    </p>
-                    <p className="text-zinc-500/75 font-semibold pl-2">- {event.price_event}€</p>
-                    {currentDate > new Date(event.date_event) && <p className="text-zinc-500/75 font-semibold pl-2">(Evénement clos)</p>}
+                  <div className="flex flex-col">
+                    <div className="flex items-center">
+                      <p className="font-bold">{event.id_prestation.title}</p>
+                      <p className="text-brown underline italic font-semibold pl-2">{formatDateEvent(event.date_event)}</p>
+                      <p className="text-zinc-500/75 font-semibold pl-2">
+                        {event.start_time_event}/{event.end_time_event}
+                      </p>
+                      <p className="text-zinc-500/75 font-semibold pl-2">- {event.price_event}€</p>
+                      {currentDate > new Date(event.date_event) && <p className="text-zinc-500/75 font-semibold pl-2">(Evénement clos)</p>}
+                    </div>
+                    <div className="items-start italic">Lieu: {event.id_parcs.name}</div>
                   </div>
                   <div className="flex items-center">
                     <p
@@ -136,9 +139,7 @@ const AdminAgendaEvenement = () => {
                       <img src={event.id_prestation.aplicable_on === 'hunter' ? hunter : dog} alt="Chien" className="h-6 w-6" />
                       <span>
                         <span className="text-xl">
-                          {event.id_prestation.aplicable_on === 'hunter'
-                            ? event.number_max_hunter_event - event.number_hunter_event
-                            : event.number_max_dog_event - event.number_dog_event}
+                          {event.id_prestation.aplicable_on === 'hunter' ? event.number_hunter_event : event.number_dog_event}
                         </span>
                         /{event.id_prestation.aplicable_on === 'hunter' ? event.number_max_hunter_event : event.number_max_dog_event}
                       </span>

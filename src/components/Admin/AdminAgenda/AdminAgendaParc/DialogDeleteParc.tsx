@@ -50,7 +50,7 @@ const DialogDeleteParc = () => {
               <div className="my-12">
                 <div className="flex flex-col gap-2 justify-center items-center">
                   <p className="text-2xl font-bold">{parc.title}</p>
-                  <p className="text-base italic font-medium">Tous les évènements et prestations liés à ce parc seront supprimés</p>
+                  <p className="text-base italic font-medium">Tous les évènements liés à ce parc seront supprimés</p>
                 </div>
               </div>
             </div>

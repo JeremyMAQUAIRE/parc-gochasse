@@ -37,7 +37,7 @@ const AdminAgendaEvenementParticipants = ({ idEvent }: IAdminAgendaEvenementPart
   return (
     <div>
       {participants.length > 0 ? (
-        <ul className="ml-20 mb-4">
+        <ul className="ml-20 my-4">
           {participants.map((participant: IParticipant) => (
             <li key={participant.id}>
               {participant.directus_users_id.first_name} {participant.directus_users_id.last_name} :
