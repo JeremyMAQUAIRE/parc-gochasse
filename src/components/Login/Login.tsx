@@ -87,7 +87,7 @@ const Login = () => {
         </div>
         <div className="flex justify-between w-full mt-12 gap-4 h-10">
           <a
-            href="https://demo.gochasse.com"
+            href="https://gochasse.com"
             className="w-1/2 bg-green-600 text-white text-center flex justify-center items-center rounded-lg font-semibold transition-transform transform duration-300 ease-in-out hover:bg-green-800 hover:translate-y-[-4px]"
           >
             GoChasse
