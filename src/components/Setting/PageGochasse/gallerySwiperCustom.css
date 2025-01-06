@@ -1,0 +1,7 @@
+.swiper-pagination{
+  display: none;
+}
+
+.swiper-button-prev, .swiper-button-next {
+  color:#5C3117;
+}

@@ -35,7 +35,7 @@ const AdminAgendaPrestation = () => {
           <Plus className="text-white bg-brown w-8 h-8" /> Ajouter une catégorie
         </button>
       </header>
-      <section className="overflow-y-auto h-screen flex-1 mt-16">
+      <section className="overflow-y-auto h-screen flex-1 mt-16 mb-24">
         {/* Adjusted margin-top */}
         {category.map((cat) => (
           <AdminAgendaCategoryItem key={cat.id} id={cat.id} title={cat.title} color={cat.color} />
