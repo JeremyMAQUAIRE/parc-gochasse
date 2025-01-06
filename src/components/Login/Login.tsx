@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { AppDispatch } from '../store/store';
 import login from '../../api/directus/user/login';
-import bgLogin from '../../../public/bg-login.png';
+import bgLogin from '../../../public/bg-login.jpg';
 import logo from '../../../public/logo_full.webp';
 
 const Login = () => {
@@ -36,8 +36,8 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full h-full bg-cover flex items-center" style={{ backgroundImage: `url(${bgLogin})` }}>
-      <form className="ml-[65%] flex w-1/4 flex-col items-center justify-between rounded-3xl bg-yellow-100/35 p-6 shadow-[25px_25px_25px_0px_rgba(0,0,0)] backdrop-blur-sm animate-slide-in">
+    <div className="w-full h-full bg-cover bg-bottom flex items-center" style={{ backgroundImage: `url(${bgLogin})` }}>
+      <form className="ml-[10%] flex w-1/4 flex-col items-center justify-between rounded-3xl bg-yellow-100/35 p-6 shadow-[25px_25px_25px_0px_rgba(0,0,0)] backdrop-blur-sm animate-slide-in">
         <div className="flex flex-col w-full items-center">
           <img src={logo} alt="logo du site" className="rounded-lg mb-3" />
           <h2 className="mb-6 text-3xl font-bold italic text-brown">Parc et enclos</h2>
