@@ -21,7 +21,6 @@ const SettingCgu = () => {
         <h2 className="text-brown text-xl font-bold my-6">ARTICLE 1 : LES MENTIONS LEGALES</h2>
         <p className="mb-4">
           L’édition et la direction de la publication du site gochasse.com est assurée par MEYNARD François, domicilié 1 rue de la Grole.
-          <br /> Numéro de téléphone est 07 43 28 08 28.
           <br /> Adresse e-mail contact@gochasse.com.
         </p>
         <p className="mb-4">
