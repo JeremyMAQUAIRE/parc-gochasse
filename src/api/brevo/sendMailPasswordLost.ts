@@ -33,7 +33,7 @@ export default createAsyncThunk('FETCH_SEND_MAIL_PASSWORD_LOST', async (email: s
       ],
       templateId: 5,
       params: {
-        LIEN_VALIDATION_MAIL_PASSWORD_LOST: `https://parc.gochasse.com/nouveau-mot-de-passe/${token}`,
+        LIEN_VALIDATION_MAIL_PASSWORD_LOST: `https://parc.gochasse.com/login/${token}`,
       },
     },
     {

@@ -8,6 +8,7 @@ import logo from '../../../public/logo_full.webp';
 import { AppDispatch } from '../store/store';
 import login from '../../api/directus/user/login';
 import sendMailPasswordLost from '../../api/brevo/sendMailPasswordLost';
+import NotificationSuccesSend from './NotificationSuccesSend';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string>('');
   const [isResetting, setIsResetting] = useState(false);
+  const [show, setShow] = useState(false);
 
   const handleLogin = async () => {
     const log = await dispatch(login({ email, password }));
@@ -43,6 +45,8 @@ const Login = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setIsEmailValid(emailRegex.test(email));
     if (isEmailValid) {
+      setShow(true);
+      setIsResetting(false);
       dispatch(sendMailPasswordLost(email));
     }
   };
@@ -142,6 +146,7 @@ const Login = () => {
           </a>
         </div>
       </form>
+      <NotificationSuccesSend show={show} setShow={setShow} />
     </div>
   );
 };
