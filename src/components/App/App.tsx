@@ -12,11 +12,13 @@ import ListUser from '../Listuser/ListUser';
 import Admin from '../Admin/Admin';
 import Home from '../Login/Login';
 import BadResolution from './BadResolution';
+import Password from '../Login/Password';
 
 function App() {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const tokenPassword = location.pathname.split('login/')[1];
   const [isLandscape, setIsLandscape] = useState(false);
 
   useEffect(() => {
@@ -48,7 +50,11 @@ function App() {
     // Check if the user is already connected
     const isConnected = Cookies.get('isConnected');
     if (!isConnected) {
-      navigate('/login');
+      if (tokenPassword) {
+        navigate(`/login/${tokenPassword}`);
+      } else {
+        navigate('/login');
+      }
     }
 
     // Cleanup event listeners on component unmount
@@ -56,17 +62,18 @@ function App() {
       window.removeEventListener('resize', handleOrientationChange);
       window.removeEventListener('orientationchange', handleOrientationChange);
     };
-  }, [dispatch, navigate]);
+  }, [dispatch, navigate, tokenPassword]);
 
   return (
     <div className="bg-[#EAEAEA] h-screen">
       {isLandscape && <BadResolution />}
       {!isLandscape && (
         <>
-          {location.pathname !== '/' && location.pathname !== '/login' && <Header />}
+          {location.pathname !== '/' && !location.pathname.startsWith('/login') && <Header />}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Home />} />
+            <Route path="/login/:passwordToken" element={<Password />} />
             <Route path="agenda" element={<Agenda />}>
               <Route path=":parcAgenda" element={<Agenda />} />
             </Route>
