@@ -31,7 +31,11 @@ const Login = () => {
       });
       localStorage.setItem('userData', JSON.stringify(user.data.data));
       if (user.data.data.role === import.meta.env.VITE_DIRECTUS_ROLE_ID) {
-        navigate('/agenda');
+        if (localStorage.getItem('cguCgvAccepted') !== 'true') {
+          navigate('/cgu_cgv');
+        } else {
+          navigate('/agenda');
+        }
       } else {
         setError("Vous n'avez pas les droits pour accéder à cette page, connectez-vous sur Société ou GoChasse");
       }

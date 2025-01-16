@@ -13,6 +13,7 @@ import Admin from '../Admin/Admin';
 import Home from '../Login/Login';
 import BadResolution from './BadResolution';
 import Password from '../Login/Password';
+import CguCgvAccepted from '../Login/CguCgvAccepted';
 
 function App() {
   const dispatch: AppDispatch = useDispatch();
@@ -69,11 +70,12 @@ function App() {
       {isLandscape && <BadResolution />}
       {!isLandscape && (
         <>
-          {location.pathname !== '/' && !location.pathname.startsWith('/login') && <Header />}
+          {location.pathname !== '/' && location.pathname !== '/cgu_cgv' && !location.pathname.startsWith('/login') && <Header />}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Home />} />
             <Route path="/login/:passwordToken" element={<Password />} />
+            <Route path="/cgu_cgv" element={<CguCgvAccepted />} />
             <Route path="agenda" element={<Agenda />}>
               <Route path=":parcAgenda" element={<Agenda />} />
             </Route>
