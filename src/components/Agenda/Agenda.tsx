@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import timeGrid from '@fullcalendar/timegrid';
 import frLocale from '@fullcalendar/core/locales/fr';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import AgendaToolbar from './AgendaToolbar';
 import './Agenda.scss';
@@ -12,11 +12,14 @@ import readAllEventsByUser from '../../api/directus/event/readAllEventsByUser';
 import IEvent from '../../@types/event';
 import EventContent from './AgendaEventContent';
 import readAllEventsByUserBySlugParc from '../../api/directus/event/readAllEventsByUserBySlugParc';
+import IParc from '../../@types/parc';
 
 const Agenda = () => {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const { parcAgenda } = useParams();
   const calendarRef = useRef<FullCalendar | null>(null);
+  const parcs: IParc[] = useSelector((state: RootState) => state.parcReducer.data);
   const eventFullCalendar = useSelector((state: RootState) => state.eventReducer.dataEvent);
   const [events, setEvents] = useState<{ title: string; start: Date; end: Date; eventItem: IEvent }[]>([]);
   const initialDate: string = localStorage.getItem('displayCurrentDate') || new Date().toISOString().split('T')[0];
@@ -32,11 +35,14 @@ const Agenda = () => {
       if (parcAgenda) {
         await dispatch(readAllEventsByUserBySlugParc(parcAgenda));
       } else {
+        if (parcs.length > 0) {
+          navigate(`/agenda/${parcs[0].slug}`);
+        }
         await dispatch(readAllEventsByUser());
       }
     };
     fetchEvents();
-  }, [dispatch, parcAgenda]);
+  }, [dispatch, navigate, parcAgenda, parcs]);
 
   useEffect(() => {
     if (eventFullCalendar.length > 0) {

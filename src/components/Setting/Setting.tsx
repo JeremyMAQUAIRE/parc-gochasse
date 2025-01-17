@@ -5,6 +5,7 @@ import SettingNav from './SettingNav';
 import SettingContact from './SettingContact';
 import SettingCgu from './SettingCgu';
 import SettingPageGoChasse from './PageGochasse/SettingPageGoChasse';
+import SettingCgv from './SettingCgv';
 
 const Setting = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const Setting = () => {
         {link.menuSetting === 'ma-page' && <SettingPageGoChasse />}
         {link.menuSetting === 'contact' && <SettingContact />}
         {link.menuSetting === 'condition-general-utilisation' && <SettingCgu />}
+        {link.menuSetting === 'condition-general-vente' && <SettingCgv />}
       </div>
     </div>
   );

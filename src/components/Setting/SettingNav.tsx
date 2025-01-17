@@ -45,6 +45,16 @@ const SettingNav = () => {
           >
             <Info /> Voir les CGU
           </NavLink>
+          <NavLink
+            to="condition-general-vente"
+            className={({ isActive }) =>
+              isActive
+                ? 'flex h-16 items-center gap-2 pl-4 text-brown font-semibold border-b-[1px] border-black'
+                : 'flex h-16 items-center gap-2 pl-4 border-b-[1px] border-black'
+            }
+          >
+            <Info /> Voir les CGV
+          </NavLink>
         </div>
         <div>
           <div className="settingNav-content_item settingNav-content_item_logout">

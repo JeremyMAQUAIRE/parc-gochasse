@@ -8,7 +8,7 @@ const SettingPageGoChassePresentation = () => {
       <Editor
         disabled
         apiKey={import.meta.env.VITE_TINYMCE}
-        initialValue={user.text_mail_description}
+        initialValue={user.text_description}
         init={{
           plugins: 'autoresize',
           language: 'fr_FR',
