@@ -34,13 +34,13 @@ const Agenda = () => {
     const fetchEvents = async () => {
       if (parcAgenda) {
         await dispatch(readAllEventsByUserBySlugParc(parcAgenda));
+      } else if (parcs.length > 0) {
+        navigate(`/agenda/${parcs[0].slug}`);
       } else {
-        if (parcs.length > 0) {
-          navigate(`/agenda/${parcs[0].slug}`);
-        }
         await dispatch(readAllEventsByUser());
       }
     };
+
     fetchEvents();
   }, [dispatch, navigate, parcAgenda, parcs]);
 
