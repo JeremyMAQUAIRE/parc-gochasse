@@ -271,13 +271,14 @@ const DialogCreateEvent = () => {
                   <select
                     id="location"
                     name="location"
+                    disabled
                     value={prestationModel.applicableOn === 'hunter' ? 'hunter' : 'dog'}
                     onChange={(e) => {
                       dispatch(actionChangePrestationApplicableOn(e.target.value));
                       dispatch(actionChangePrestationNumberHunter(0));
                       dispatch(actionChangePrestationNumberDog(0));
                     }}
-                    className="flex w-[550px] py-1.5 pl-3 pr-3 text-base text-gray-900 placeholder:text-gray-400 bg-white focus:outline-none border border-gray-300 rounded-md focus:border-brown"
+                    className="flex w-[550px] py-1.5 pl-3 pr-3 text-base text-gray-900 placeholder:text-gray-400 bg-white focus:outline-none border border-gray-300 rounded-md focus:border-brown disabled:bg-gray-200"
                   >
                     <option value="hunter">Participant(s)</option>
                     <option value="dog">Chien(s)</option>

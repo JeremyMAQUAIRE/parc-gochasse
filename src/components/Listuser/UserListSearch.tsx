@@ -1,8 +1,4 @@
-import { Mail, Plus } from 'react-feather';
-import { useDispatch } from 'react-redux';
-
-import { AppDispatch } from '../store/store';
-import { actionClickDialogNewUserInTheTeam } from '../store/actionCreator';
+import { Mail } from 'react-feather';
 
 interface IUserListSearch {
   mailList: string[];
@@ -10,7 +6,6 @@ interface IUserListSearch {
 }
 
 const UserListSearch = ({ mailList, setSearch }: IUserListSearch) => {
-  const dispatch: AppDispatch = useDispatch();
   const proMail = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData') as string) : null;
 
   const nbreResult = mailList.length;
@@ -29,22 +24,13 @@ const UserListSearch = ({ mailList, setSearch }: IUserListSearch) => {
         <div className="w-8/12 text-center m-auto text-2xl text-brown font-semibold">Membre(s) enregistré(s) : {nbreResult}</div>
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 justify-end items-end">
+      <div className="flex flex-1 flex-col gap-2 justify-center items-end">
         <a
           href={`mailto:${proMail && proMail.email}?bcc=${mailList.join(';')}`}
           className="flex items-center justify-center gap-4 w-80 py-2 rounded-lg text-white font-semibold bg-zinc-400 hover:scale-110"
         >
           <Mail className="text-brown" /> Envoyer un mail groupe
         </a>
-
-        <button
-          type="button"
-          onClick={() => dispatch(actionClickDialogNewUserInTheTeam(true))}
-          className="flex items-center justify-center gap-4 w-80 py-2 bg-brown text-white text-xl font-semibold border-4 border-black rounded-xl hover:scale-110"
-        >
-          <Plus className="w-8 h-8 text-white" />
-          Ajouter un membre
-        </button>
       </div>
     </section>
   );
