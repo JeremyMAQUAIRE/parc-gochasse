@@ -22,7 +22,7 @@ const Agenda = () => {
   const parcs: IParc[] = useSelector((state: RootState) => state.parcReducer.data);
   const eventFullCalendar = useSelector((state: RootState) => state.eventReducer.dataEvent);
   const [events, setEvents] = useState<{ title: string; start: Date; end: Date; eventItem: IEvent }[]>([]);
-  const initialDate: string = localStorage.getItem('displayCurrentDate') || new Date().toISOString().split('T')[0];
+  const [currentDate, setCurrentDate] = useState<string>(localStorage.getItem('displayCurrentDate') || new Date().toISOString().split('T')[0]);
 
   const headerToolbar = {
     left: 'prev title next today',
@@ -93,6 +93,17 @@ const Agenda = () => {
     return <div className={`h-[60px] w-[200px] flex items-center justify-center ${todayClass}`}>{args.text}</div>;
   };
 
+  const handleDateChange = (arg: { start: Date; end: Date }) => {
+    // Crée une copie de la date de début
+    const newDate = new Date(arg.start);
+    // Ajoute un jour
+    newDate.setDate(newDate.getDate() + 1);
+    // Convertit la nouvelle date en ISO (format YYYY-MM-DD)
+    const formattedDate = newDate.toISOString().split('T')[0];
+    setCurrentDate(formattedDate); // Met à jour l'état avec la nouvelle date
+    localStorage.setItem('displayCurrentDate', formattedDate); // Enregistre la date dans le localStorage
+  };
+
   return (
     <section
       className="px-40 overflow-scroll"
@@ -105,7 +116,7 @@ const Agenda = () => {
         locale={frLocale}
         plugins={[timeGrid]}
         initialView="timeGridWeek"
-        initialDate={initialDate}
+        initialDate={currentDate}
         allDaySlot={false}
         events={events}
         eventContent={EventContent}
@@ -120,6 +131,7 @@ const Agenda = () => {
         headerToolbar={headerToolbar}
         nowIndicator
         weekNumbers
+        datesSet={handleDateChange} // Gérer le changement de date
       />
     </section>
   );

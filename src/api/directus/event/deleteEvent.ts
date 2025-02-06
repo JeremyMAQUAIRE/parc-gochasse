@@ -51,7 +51,7 @@ export default createAsyncThunk('FETCH_DELETE_EVENT', async (id: number) => {
           EVENT_DATE: formattedDateTime,
           EVENT_PRESTATION: event.data.data.id_prestation.title,
           EVENT_PARTICIPANT: participant,
-          EVENT_LINK: `${import.meta.env.VITE_GOCHASSE_URL}parc-chasse/${event.data.data.id_user}`,
+          EVENT_LINK: `${import.meta.env.VITE_GOCHASSE_URL}pro/${event.data.data.id_user}`,
         },
       },
       {
