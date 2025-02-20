@@ -20,6 +20,7 @@ import {
   actionChangePrestationTimeStop,
   actionClickDialogCreateEvent,
   actionResetEventState,
+  actionResetPrestationState,
 } from '../../../store/actionCreator';
 import dog from '../../../../../public/dog.webp';
 import hunter from '../../../../../public/hunter.webp';
@@ -79,6 +80,7 @@ const DialogCreateEvent = () => {
       onClose={() => {
         dispatch(actionClickDialogCreateEvent(false));
         dispatch(actionResetEventState());
+        dispatch(actionResetPrestationState());
       }}
       className="relative z-10"
     >
@@ -101,6 +103,7 @@ const DialogCreateEvent = () => {
                   onClick={() => {
                     dispatch(actionClickDialogCreateEvent(false));
                     dispatch(actionResetEventState());
+                    dispatch(actionResetPrestationState());
                   }}
                   className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"
                 >
