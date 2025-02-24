@@ -101,7 +101,7 @@ const DialogCreatePrestation = () => {
                     maxLength={254}
                     value={prestation.description === '' ? '' : prestation.description}
                     onChange={(e) => dispatch(actionChangePrestationDescription(e.target.value))}
-                    placeholder="Ex: Battue au sein de forêt du Puy Bleue"
+                    placeholder="Ex: Battue au sein de la forêt du Puy Bleue"
                     className="block w-[550px] py-1.5 pl-3 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none border border-gray-300 rounded-md focus:border-brown"
                   />
                 </div>
