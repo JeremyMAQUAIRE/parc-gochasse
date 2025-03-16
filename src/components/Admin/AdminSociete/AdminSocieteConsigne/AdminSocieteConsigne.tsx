@@ -48,7 +48,7 @@ const AdminSocieteConsigne = () => {
           }}
           initialValue={
             user.textConsigne ||
-            '<h3><strong class="custom-strong">Présentation de votre société</strong><br></h3> <p>Rédigez quelques lignes expliquant votre activité et les points forts de votre parc ou société.</p>'
+            '<h3><strong class="custom-strong">Règles et consignes de votre société</strong><br></h3> <p>Rédigez quelques lignes expliquant votre activité et les points forts de votre parc ou société.</p>'
           }
           onBlur={handleChangeTextDesciption}
           init={{

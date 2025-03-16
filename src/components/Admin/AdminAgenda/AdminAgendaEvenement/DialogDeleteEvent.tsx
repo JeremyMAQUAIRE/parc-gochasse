@@ -16,6 +16,7 @@ const DialogDeleteEvent = () => {
     await dispatch(deleteEvent(event.id));
     dispatch(actionClickDialogDeleteEvent(false));
     dispatch(readAllEventsByUser());
+    window.location.reload();
   };
 
   return (

@@ -1,6 +1,6 @@
 import dog from '../../../public/dog.webp';
 import hunter from '../../../public/hunter.webp';
-import logo from '../../../public/logo.webp';
+import logo from '../../../public/logo_ss_bg.png';
 
 const AdminNavEvents = () => {
   const currentDate = new Date();

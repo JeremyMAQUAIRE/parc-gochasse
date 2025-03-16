@@ -23,7 +23,7 @@ const Login = () => {
   const handleLogin = async () => {
     const log = await dispatch(login({ email, password }));
     if (login.fulfilled.match(log)) {
-      const user = await axios.get('https://api.gochasse.com/users/me', {
+      const user = await axios.get(`${import.meta.env.VITE_GOCHASSE_API}users/me`, {
         headers: {
           'content-type': 'application/json',
           Authorization: `Bearer ${log.payload.data.access_token}`,

@@ -14,7 +14,7 @@ export default createAsyncThunk('FETCH_LOGIN_USER', async (credentials: ICredent
   try {
     // Make the API request to log the user in
     const response = await axios.post(
-      'https://api.gochasse.com/auth/login',
+      `${import.meta.env.VITE_GOCHASSE_API}auth/login`,
       {
         email: credentials.email,
         password: credentials.password,
