@@ -9,7 +9,7 @@ export default createAsyncThunk('FETCH_CREATE_CATEGORY', async (_, thunkAPI) => 
   const newCatgerory = state.categoryReducer;
   await axios
     .post(
-      'https://api.gochasse.com/items/categories',
+      `${import.meta.env.VITE_GOCHASSE_API}items/categories`,
       {
         title: newCatgerory.title,
         color: newCatgerory.color,

@@ -12,6 +12,7 @@ import AdminStatMessageRevenu from './AdminStatMessage/AdminStatMessageRevenu/Ad
 import AdminStatMessageMail from './AdminStatMessage/AdminStatMessageMail/AdminStatMessageMail';
 import AdminAgendaPrestation from './AdminAgenda/AdminAgendaPrestation/AdminAgendaPrestation';
 import AdminAgendaParc from './AdminAgenda/AdminAgendaParc/AdminAgendaParc';
+import AdminSocietePaiementLigne from './AdminSociete/AdminSocietePaiementLigne/AdminSocietePaiementLigne';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ const Admin = () => {
         {link.menuAdmin === 'notification' && <AdminSocieteNotification />}
         {link.menuAdmin === 'horaires-délais' && <AdminSocieteHoraireDelai />}
         {link.menuAdmin === 'consigne' && <AdminSocieteConsigne />}
+        {link.menuAdmin === 'paiement-en-ligne' && <AdminSocietePaiementLigne />}
         {link.menuAdmin === 'chiffre-affaire' && <AdminStatMessageRevenu />}
         {link.menuAdmin === 'email' && <AdminStatMessageMail />}
       </div>

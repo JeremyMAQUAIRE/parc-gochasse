@@ -125,7 +125,7 @@ const AdminNav = () => {
               </div>
             </div>
           </div>
-          <div className={`overflow-hidden transition-all duration-300 ease-linear ${openSections.section2 ? 'h-[15rem]' : 'h-0'}`}>
+          <div className={`overflow-hidden transition-all duration-300 ease-linear ${openSections.section2 ? 'h-full' : 'h-0'}`}>
             <ul>
               <NavLink
                 to="photos"
@@ -176,6 +176,16 @@ const AdminNav = () => {
                 }
               >
                 - Gestion des consignes
+              </NavLink>
+              <NavLink
+                to="paiement-en-ligne"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'h-12 pl-16 text-green-600 font-semibold flex items-center justify-between after:w-16 after:h-full after:bg-[#191919]'
+                    : 'h-12 pl-16 flex items-center justify-between after:w-16 after:h-full after:bg-[#191919]'
+                }
+              >
+                - Paiements en ligne
               </NavLink>
             </ul>
           </div>

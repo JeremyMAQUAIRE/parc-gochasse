@@ -5,6 +5,7 @@ import { fr } from 'date-fns/locale/fr';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
+import StripeLogo from '../../../public/stripe-2.svg';
 
 import AgendaTime from './AgendaTime';
 import calendar from '../../../public/calendar.webp';
@@ -13,6 +14,7 @@ import { AppDispatch, RootState } from '../store/store';
 import { actionClickDialogCreateEvent } from '../store/actionCreator';
 import IParc from '../../@types/parc';
 import readAllGestionParcByUser from '../../api/directus/parc/readAllGestionParcByUser';
+import readDashboardStripe from '../../api/stripe/readDashboardStripe';
 
 registerLocale('fr', fr);
 setDefaultLocale('fr');
@@ -111,6 +113,13 @@ const AgendaToolbar = () => {
           className="w-14 h-14 p-3 bg-brown flex justify-center items-center border-4 border-black rounded-xl hover:scale-110"
         >
           <List className="w-10 h-10 text-white" />
+        </button>
+        <button type="button" onClick={() => dispatch(readDashboardStripe())}>
+          <img
+            src={StripeLogo}
+            alt="Stripe"
+            className="w-14 h-14 bg-[#8BB7F0] flex justify-center items-center border-4 border-black rounded-xl hover:scale-110"
+          />
         </button>
       </div>
       {dialogOpen.dialogCreateEvent && <DialogCreateEvent />}

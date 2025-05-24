@@ -3,12 +3,14 @@ import { createReducer } from '@reduxjs/toolkit';
 import DOMPurify from 'dompurify';
 
 import {
+  actionChangeEventAcompte,
   actionChangeEventData,
   actionChangeEventDate,
   actionChangeEventId,
   actionChangeEventIdCategory,
   actionChangeEventIdParc,
   actionChangeEventIdPrestation,
+  actionChangeEventPaiementOnLine,
   actionChangeEventRecurrence,
   actionChangeEventRepetition,
   actionChangeEventTimeUnit,
@@ -26,6 +28,8 @@ const initialState = {
   isRecurrent: false,
   timeUnit: 'day',
   repetitionNumber: 0,
+  paiementOnLine: '',
+  acompte: 0,
   dataEvent: [],
 };
 
@@ -64,6 +68,12 @@ const eventReducer = createReducer(initialState, (builder) => {
     })
     .addCase(actionChangeEventData, (state, action) => {
       state.dataEvent = action.payload;
+    })
+    .addCase(actionChangeEventPaiementOnLine, (state, action) => {
+      state.paiementOnLine = DOMPurify.sanitize(action.payload);
+    })
+    .addCase(actionChangeEventAcompte, (state, action) => {
+      state.acompte = action.payload;
     });
 });
 export default eventReducer;

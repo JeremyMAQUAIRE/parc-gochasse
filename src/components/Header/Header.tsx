@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <header className="bg-black h-16 flex justify-between items-center border-b-brown border-b-4">
       <section className="flex items-center text-lg h-full">
-        <img src={logoFull} alt="Logo GoChasse" className="h-12 w-68 px-10" />
+        <img src={logoFull} alt="Logo GoChasse" className="h-12 w-68 px-[55px]" />
         <NavLink
           to="/parametres"
           className={({ isActive }) =>

@@ -5,10 +5,12 @@ import DatePicker from 'react-datepicker';
 
 import { AppDispatch, RootState } from '../../../store/store';
 import {
+  actionChangeEventAcompte,
   actionChangeEventDate,
   actionChangeEventIdCategory,
   actionChangeEventIdParc,
   actionChangeEventIdPrestation,
+  actionChangeEventPaiementOnLine,
   actionChangeEventRecurrence,
   actionChangeEventRepetition,
   actionChangeEventTimeUnit,
@@ -34,6 +36,8 @@ import createEvent from '../../../../api/directus/event/createEvent';
 import readAllEventsByUser from '../../../../api/directus/event/readAllEventsByUser';
 import readAllGestionParcByUser from '../../../../api/directus/parc/readAllGestionParcByUser';
 import IParc from '../../../../@types/parc';
+import ValidationDashboardStripeIsValid from '../../../../api/stripe/ValidationDashboardStripeIsValid';
+import DialogCreateEventPaiement from './DialogCreateEventPaiement';
 
 const DialogCreateEvent = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -42,8 +46,22 @@ const DialogCreateEvent = () => {
   const parcs = useSelector((state: RootState) => state.parcReducer.data);
   const categories: ICategory[] = useSelector((state: RootState) => state.categoryReducer.dataCategory);
   const prestationModel = useSelector((state: RootState) => state.prestationReducer);
+  const userDataLocal = localStorage.getItem('userData');
+  const userData = userDataLocal ? JSON.parse(userDataLocal) : null;
+  const isStripeAccountConnected = userData?.stripe_account;
   const [prestations, setPrestations] = useState<IPrestation[]>([]);
   const [color, setColor] = useState('#000000');
+  const [isValidStripe, setIsValidStripe] = useState(true);
+
+  useEffect(() => {
+    const checkStripeAccount = async () => {
+      if (isStripeAccountConnected) {
+        const result = await dispatch(ValidationDashboardStripeIsValid()).unwrap();
+        setIsValidStripe(result);
+      }
+    };
+    checkStripeAccount();
+  }, [dispatch, isStripeAccountConnected]);
 
   useEffect(() => {
     dispatch(readCategory());
@@ -65,6 +83,15 @@ const DialogCreateEvent = () => {
       await dispatch(readPrestationById(event.idPrestation));
     };
     fetchPrestation();
+  }, [dispatch, event.idPrestation]);
+
+  useEffect(() => {
+    const fetchPrestation = async () => {
+      await dispatch(readPrestationById(event.idPrestation));
+    };
+    dispatch(actionChangeEventPaiementOnLine('enLigne'));
+    fetchPrestation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, event.idPrestation]);
 
   const handleCreatePrestation = async () => {
@@ -287,6 +314,36 @@ const DialogCreateEvent = () => {
                     <option value="dog">Chien(s)</option>
                   </select>
                 </div>
+                <DialogCreateEventPaiement isValidStripe={isValidStripe} />
+                {isStripeAccountConnected && isValidStripe && (
+                  <div className="flex justify-between items-center mt-4">
+                    <label htmlFor="acompte" className="text-lg font-medium text-gray-900">
+                      Montant de l&apos;acompte<span className="text-green-600 font-bold pl-1">*</span>
+                    </label>
+                    <input
+                      id="acompte"
+                      type="number"
+                      min={0}
+                      disabled={event.paiementOnLine === 'surPlace'}
+                      max={prestationModel.price}
+                      value={event.acompte}
+                      onChange={(e) => {
+                        let inputValue = parseInt(e.target.value, 10);
+
+                        // Si NaN (valeur vide ou invalide), on ne fait rien
+                        if (Number.isNaN(inputValue)) inputValue = 0;
+
+                        // Clamp la valeur entre 0 et prestationModel.price
+                        if (inputValue < 0) inputValue = 0;
+                        if (inputValue > prestationModel.price) inputValue = prestationModel.price;
+
+                        dispatch(actionChangeEventAcompte(inputValue));
+                      }}
+                      placeholder="Montant de l'acompte en €"
+                      className="block w-[550px] py-1.5 pl-3 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none border border-gray-300 rounded-md focus:border-green-600 disabled:bg-gray-200"
+                    />
+                  </div>
+                )}
 
                 {/* Limite */}
                 <div className="flex justify-between items-center mt-4">

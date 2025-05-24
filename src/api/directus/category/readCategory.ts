@@ -11,7 +11,7 @@ export default createAsyncThunk('FETCH_READ_ALL_CATEGORY', async (_, thunkAPI) =
   const userData = JSON.parse(userDataString);
 
   await axios
-    .get(`https://api.gochasse.com/items/categories?filter[id_user][_eq]=${userData.id}&fields=id,title,color&sort=title`, {
+    .get(`${import.meta.env.VITE_GOCHASSE_API}items/categories?filter[id_user][_eq]=${userData.id}&fields=id,title,color&sort=title`, {
       headers: {
         'content-type': 'application/json',
         Authorization: `Bearer ${Cookies.get('tokenJWT')}`,

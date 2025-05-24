@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 
 export default createAsyncThunk('FETCH_READ_PRESTATION_BY_IDCATEGORY', async (id: number) => {
   const response = await axios.get(
-    `https://api.gochasse.com/items/prestations?filter[id_category][_eq]=${id}&fields=id,title,start_time,end_time,price`,
+    `${import.meta.env.VITE_GOCHASSE_API}items/prestations?filter[id_category][_eq]=${id}&fields=id,title,start_time,end_time,price`,
     {
       headers: {
         'content-type': 'application/json',

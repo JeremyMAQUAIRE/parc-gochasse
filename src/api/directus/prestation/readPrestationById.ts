@@ -15,7 +15,9 @@ import {
 export default createAsyncThunk('FETCH_READ_PRESTATION_BY_ID', async (id: number, thunkAPI) => {
   await axios
     .get(
-      `https://api.gochasse.com/items/prestations/${id}?fields=id,title,description,start_time,end_time,price,aplicable_on,number_of_dogs,number_of_participants`,
+      `${
+        import.meta.env.VITE_GOCHASSE_API
+      }items/prestations/${id}?fields=id,title,description,start_time,end_time,price,aplicable_on,number_of_dogs,number_of_participants`,
       {
         headers: {
           'content-type': 'application/json',

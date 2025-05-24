@@ -9,7 +9,7 @@ export default createAsyncThunk('FETCH_READ_USER', async () => {
   }
 
   await axios
-    .get('https://api.gochasse.com/users/me', {
+    .get(`${import.meta.env.VITE_GOCHASSE_API}users/me`, {
       headers: {
         'content-type': 'application/json',
         Authorization: `Bearer ${Cookies.get('tokenJWT')}`,

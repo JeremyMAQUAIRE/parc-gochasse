@@ -9,7 +9,7 @@ export default createAsyncThunk('FETCH_UPDATE_CATEGORY', async (id: number, thun
   const newCatgerory = state.categoryReducer;
   await axios
     .patch(
-      `https://api.gochasse.com/items/categories/${id}`,
+      `${import.meta.env.VITE_GOCHASSE_API}items/categories/${id}`,
       {
         title: newCatgerory.title,
         color: newCatgerory.color,

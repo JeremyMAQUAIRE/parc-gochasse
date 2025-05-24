@@ -8,7 +8,7 @@ export default createAsyncThunk('FETCH_UPDATE_PRESTATION', async (id: number, th
   const updatePrestation = state.prestationReducer;
 
   await axios.patch(
-    `https://api.gochasse.com/items/prestations/${id}`,
+    `${import.meta.env.VITE_GOCHASSE_API}items/prestations/${id}`,
     {
       title: updatePrestation.title,
       description: updatePrestation.description,

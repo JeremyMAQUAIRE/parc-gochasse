@@ -139,6 +139,8 @@ export const actionChangeEventRecurrence = createAction<boolean>('@event/CHANGE_
 export const actionChangeEventTimeUnit = createAction<string>('@event/CHANGE_EVENT_TIMEUNIT');
 export const actionChangeEventRepetition = createAction<number>('@event/CHANGE_EVENT_REPETITION');
 export const actionChangeEventData = createAction<[]>('@event/CHANGE_EVENT_DATA');
+export const actionChangeEventAcompte = createAction<number>('@event/CHANGE_EVENT_ACOMPTE');
+export const actionChangeEventPaiementOnLine = createAction<string>('@event/CHANGE_EVENT_PAIEMENT_ONLINE');
 
 // management of mail for notification
 export const actionResetNotificationMailState = createAction('@notificationMail/RESET_NOTIFICATION _MAIL_STATE');

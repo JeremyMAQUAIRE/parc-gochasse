@@ -8,7 +8,7 @@ export default createAsyncThunk('FETCH_CREATE_PRESTATION', async (_, thunkAPI) =
   const newPrestation = state.prestationReducer;
 
   await axios.post(
-    'https://api.gochasse.com/items/prestations',
+    `${import.meta.env.VITE_GOCHASSE_API}items/prestations/`,
     {
       title: newPrestation.title,
       description: newPrestation.description,
