@@ -10,7 +10,7 @@ interface IitemUpdate {
 
 export default createAsyncThunk('FETCH_UPDATE_USER', async (itemUpdate: IitemUpdate, thunkAPI) => {
   await axios.patch(
-    `https://api.gochasse.com/users/${Cookies.get('userId')}`,
+    `${import.meta.env.VITE_GOCHASSE_API}users/${Cookies.get('userId')}`,
     {
       [itemUpdate.name]: itemUpdate.value,
     },
