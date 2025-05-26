@@ -492,6 +492,17 @@ const DialogCreateEvent = () => {
                 <div className="mt-6 flex justify-end">
                   <button
                     type="button"
+                    disabled={
+                      !event.dateEvent ||
+                      !event.idCategory ||
+                      !event.idPrestation ||
+                      !event.idParc ||
+                      !prestationModel.startTime ||
+                      !prestationModel.endTime ||
+                      !prestationModel.price ||
+                      (!prestationModel.numberDog && prestationModel.applicableOn === 'dog') ||
+                      (!prestationModel.numberHunter && prestationModel.applicableOn === 'hunter')
+                    }
                     onClick={handleCreatePrestation}
                     className="inline-flex w-52 justify-center rounded-md bg-brown px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-white hover:text-brown hover:ring-2 hover:ring-brown disabled:opacity-45 disabled:bg-brown disabled:text-white disabled:ring-0 sm:col-start-2"
                   >

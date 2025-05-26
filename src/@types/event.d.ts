@@ -29,4 +29,6 @@ export default interface IEvent {
   isRecurrent: boolean;
   timeUnit: string;
   repetitionNumber: number;
+  paiement_on_line: string;
+  acompte: number;
 }

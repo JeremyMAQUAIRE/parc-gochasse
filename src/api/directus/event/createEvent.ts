@@ -55,6 +55,8 @@ export default createAsyncThunk('FETCH_CREATE_EVENT', async (_, thunkAPI) => {
           id_category: event.idCategory,
           id_prestation: event.idPrestation,
           id_parcs: event.idParc,
+          paiement_on_line: event.paiementOnLine,
+          acompte: event.acompte,
         },
         {
           headers: {

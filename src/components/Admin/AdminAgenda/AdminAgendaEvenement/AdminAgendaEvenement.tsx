@@ -124,6 +124,12 @@ const AdminAgendaEvenement = () => {
                         {event.start_time_event}/{event.end_time_event}
                       </p>
                       <p className="text-zinc-500/75 font-semibold pl-2">- {event.price_event}€</p>
+                      <p className="text-zinc-500/75 font-semibold pl-2">
+                        - {event.paiement_on_line === 'enLigne' ? 'Paiement en ligne' : 'Paiement sur place'}
+                      </p>
+                      {event.acompte !== 0 && event.acompte < event.price_event && (
+                        <p className="text-zinc-500/75 font-semibold pl-2">- Acompte : {event.acompte}€</p>
+                      )}
                       {currentDate > new Date(event.date_event) && <p className="text-zinc-500/75 font-semibold pl-2">(Evénement clos)</p>}
                     </div>
                     <div className="items-start italic">Lieu: {event.id_parcs.name}</div>
