@@ -9,7 +9,7 @@ export default createAsyncThunk('FETCH_CREATE_GESTION_PARC', async (_, thunkAPI)
   const slug = newgestionParc.title.replace(/ /g, '-');
   const slugLower = slug.toLowerCase();
   await axios.post(
-    'https://api.gochasse.com/items/parcs_description',
+    `${import.meta.env.VITE_GOCHASSE_API}items/parcs_description`,
     {
       name: newgestionParc.title,
       slug: slugLower,

@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 export default createAsyncThunk('FETCH_DELETE_EVENT', async (id: number) => {
   // recupere les inscrits à l'évent
   const response = await axios.get(
-    `https://api.gochasse.com/items/events_directus_users?filter[events_id][_eq]=${id}
+    `${import.meta.env.VITE_GOCHASSE_API}items/events_directus_users?filter[events_id][_eq]=${id}
       &fields=directus_users_id.email`,
     {
       headers: {
@@ -17,12 +17,15 @@ export default createAsyncThunk('FETCH_DELETE_EVENT', async (id: number) => {
   const mailList = response.data.data;
 
   // récupere les information de l'event
-  const event = await axios.get(`https://api.gochasse.com/items/events/${id}?fields=*,id_prestation.id,id_prestation.title,id_user.business_name`, {
-    headers: {
-      'content-type': 'application/json',
-      Authorization: `Bearer ${Cookies.get('tokenJWT')}`,
-    },
-  });
+  const event = await axios.get(
+    `${import.meta.env.VITE_GOCHASSE_API}items/events/${id}?fields=*,id_prestation.id,id_prestation.title,id_user.business_name`,
+    {
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `Bearer ${Cookies.get('tokenJWT')}`,
+      },
+    }
+  );
 
   // Envoi des mails
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -65,7 +68,7 @@ export default createAsyncThunk('FETCH_DELETE_EVENT', async (id: number) => {
   });
 
   // Supprimer l'évent
-  await axios.delete(`https://api.gochasse.com/items/events/${id}`, {
+  await axios.delete(`${import.meta.env.VITE_GOCHASSE_API}items/events/${id}`, {
     headers: {
       'content-type': 'application/json',
       Authorization: `Bearer ${Cookies.get('tokenJWT')}`,

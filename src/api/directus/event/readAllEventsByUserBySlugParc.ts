@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import { actionChangeEventData } from '../../../components/store/actionCreator';
 
 export default createAsyncThunk('FETCH_READ_ALL_EVENTS_BY_USER_BY_SLUG_PARC', async (slug: string, thunkAPI) => {
-  const idparc = await axios.get(`https://api.gochasse.com/items/parcs_description?filter[slug][_eq]=${slug}&fields=id`, {
+  const idparc = await axios.get(`${import.meta.env.VITE_GOCHASSE_API}items/parcs_description?filter[slug][_eq]=${slug}&fields=id`, {
     headers: {
       'content-type': 'application/json',
       Authorization: `Bearer ${Cookies.get('tokenJWT')}`,
@@ -12,7 +12,9 @@ export default createAsyncThunk('FETCH_READ_ALL_EVENTS_BY_USER_BY_SLUG_PARC', as
   });
 
   const response = await axios.get(
-    `https://api.gochasse.com/items/events?filter[id_user][_eq]=${Cookies.get('userId')}&filter[id_parcs][_eq]=${idparc.data.data[0].id}&fields=*,
+    `${import.meta.env.VITE_GOCHASSE_API}items/events?filter[id_user][_eq]=${Cookies.get('userId')}&filter[id_parcs][_eq]=${
+      idparc.data.data[0].id
+    }&fields=*,
       id_prestation.title,
       id_prestation.aplicable_on,
       id_prestation.description,

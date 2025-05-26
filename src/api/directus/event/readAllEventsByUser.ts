@@ -5,7 +5,7 @@ import { actionChangeEventData } from '../../../components/store/actionCreator';
 
 export default createAsyncThunk('FETCH_READ_ALL_EVENTS_BY_USER', async (_, thunkAPI) => {
   const response = await axios.get(
-    `https://api.gochasse.com/items/events?filter[id_user][_eq]=${Cookies.get('userId')}&fields=*,
+    `${import.meta.env.VITE_GOCHASSE_API}items/events?filter[id_user][_eq]=${Cookies.get('userId')}&fields=*,
       id_prestation.title,
       id_prestation.aplicable_on,
       id_prestation.description,

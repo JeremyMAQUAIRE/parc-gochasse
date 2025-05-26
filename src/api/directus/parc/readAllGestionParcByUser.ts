@@ -5,7 +5,7 @@ import { actionChangeGestionParcData } from '../../../components/store/actionCre
 
 export default createAsyncThunk('FETCH_READ_ALL_GESTION_PARC_BY_USER', async (_, thunkAPI) => {
   await axios
-    .get(`https://api.gochasse.com/items/parcs_description?filter[id_user][_eq]=${Cookies.get('userId')}&sort=name`, {
+    .get(`${import.meta.env.VITE_GOCHASSE_API}items/parcs_description?filter[id_user][_eq]=${Cookies.get('userId')}&sort=name`, {
       headers: {
         'content-type': 'application/json',
         Authorization: `Bearer ${Cookies.get('tokenJWT')}`,

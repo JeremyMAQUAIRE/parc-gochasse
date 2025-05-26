@@ -9,7 +9,7 @@ export default createAsyncThunk('FETCH_UPDATE_GESTION_PARC', async (id: number, 
   const slug = updateItem.title.replace(/ /g, '-');
   const slugLower = slug.toLowerCase();
   await axios.patch(
-    `https://api.gochasse.com/items/parcs_description/${id}`,
+    `${import.meta.env.VITE_GOCHASSE_API}items/parcs_description/${id}`,
     {
       name: updateItem.title,
       slug: slugLower,

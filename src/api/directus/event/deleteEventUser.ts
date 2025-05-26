@@ -18,7 +18,7 @@ interface IEventMailPro {
 export default createAsyncThunk('FETCH_DELETE_EVENT_USER', async (eventMail: IEventMailPro) => {
   // Step 1: Récupérer l’événement à modifier
   const response = await axios.get(
-    `https://api.gochasse.com/items/events_directus_users/${eventMail.idEvent}
+    `${import.meta.env.VITE_GOCHASSE_API}items/events_directus_users/${eventMail.idEvent}
       ?fields=*,
               events_id.id,
               events_id.number_dog_event,
@@ -52,7 +52,7 @@ export default createAsyncThunk('FETCH_DELETE_EVENT_USER', async (eventMail: IEv
 
   // Step 2: Send the updated value to the API
   await axios.patch(
-    `https://api.gochasse.com/items/events/${currentEvent.events_id.id}`,
+    `${import.meta.env.VITE_GOCHASSE_API}items/events/${currentEvent.events_id.id}`,
     {
       number_dog_event: newNumberDogEvent,
       number_hunter_event: newNumberHunterEvent,
@@ -66,7 +66,7 @@ export default createAsyncThunk('FETCH_DELETE_EVENT_USER', async (eventMail: IEv
   );
 
   // Step : Delete reservation
-  await axios.delete(`https://api.gochasse.com/items/events_directus_users/${eventMail.idEvent}`, {
+  await axios.delete(`${import.meta.env.VITE_GOCHASSE_API}items/events_directus_users/${eventMail.idEvent}`, {
     headers: {
       'content-type': 'application/json',
       Authorization: `Bearer ${Cookies.get('tokenJWT')}`,
@@ -75,7 +75,7 @@ export default createAsyncThunk('FETCH_DELETE_EVENT_USER', async (eventMail: IEv
 
   // Step : Delete user_availability_alerts
   const alerts = await axios.get(
-    `https://api.gochasse.com/items/user_availability_alerts?filter[id_event][_eq]=${currentEvent.events_id.id}&fields=id`,
+    `${import.meta.env.VITE_GOCHASSE_API}items/user_availability_alerts?filter[id_event][_eq]=${currentEvent.events_id.id}&fields=id`,
     {
       headers: {
         'content-type': 'application/json',
@@ -85,7 +85,7 @@ export default createAsyncThunk('FETCH_DELETE_EVENT_USER', async (eventMail: IEv
   );
   await Promise.all(
     alerts.data.data.map(async (alert: IUserAlert) => {
-      await axios.delete(`https://api.gochasse.com/items/user_availability_alerts/${alert.id}`, {
+      await axios.delete(`${import.meta.env.VITE_GOCHASSE_API}items/user_availability_alerts/${alert.id}`, {
         headers: {
           'content-type': 'application/json',
           Authorization: `Bearer ${Cookies.get('tokenJWT')}`,

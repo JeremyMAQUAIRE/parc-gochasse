@@ -43,7 +43,7 @@ export default createAsyncThunk('FETCH_CREATE_EVENT', async (_, thunkAPI) => {
 
       // Create the event for each date
       await axios.post(
-        'https://api.gochasse.com/items/events',
+        `${import.meta.env.VITE_GOCHASSE_API}items/events`,
         {
           date_event: formattedOccurrenceDate, // Use the current occurrence date
           start_time_event: prestation.startTime,
