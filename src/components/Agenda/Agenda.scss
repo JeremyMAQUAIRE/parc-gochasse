@@ -1,4 +1,8 @@
 // Custom FullCalendar -- Start
+.fc-dayGridMonth-view .fc-col-header {
+  display: none !important;
+}
+
 .fc-direction-ltr {
   height: 800px;
 }
