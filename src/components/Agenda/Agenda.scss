@@ -24,9 +24,17 @@
   align-items: center;
 }
 
+.fc-toolbar-title{
+  width: 350px;
+}
+
 .fc-direction-ltr .fc-timegrid-col-events {
   width: 99%;
   margin: auto;
+}
+
+.fc-button-group {
+  width: 400px;
 }
 
 .fc .fc-button-primary {

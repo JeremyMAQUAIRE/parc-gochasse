@@ -1,10 +1,11 @@
 import FullCalendar from '@fullcalendar/react';
 import { useEffect, useRef, useState } from 'react';
 import timeGrid from '@fullcalendar/timegrid';
+import dayGridPlugin from '@fullcalendar/daygrid';
 import frLocale from '@fullcalendar/core/locales/fr';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
 
+import { useNavigate, useParams } from 'react-router-dom';
 import AgendaToolbar from './AgendaToolbar';
 import './Agenda.scss';
 import { AppDispatch, RootState } from '../store/store';
@@ -26,13 +27,14 @@ const Agenda = () => {
 
   const headerToolbar = {
     left: 'prev title next today',
-    right: 'timeGridWeek,timeGridDay',
-    className: 'default-class',
+    right: 'dayGridMonth,timeGridWeek,timeGridDay',
+    className: 'default-class', // Add a default className or customize as needed
   };
 
   useEffect(() => {
     const fetchEvents = async () => {
       if (parcAgenda) {
+        setEvents([]); // Réinitialiser les événements avant de charger les nouveaux
         await dispatch(readAllEventsByUserBySlugParc(parcAgenda));
       } else if (parcs.length > 0) {
         navigate(`/agenda/${parcs[0].slug}`);
@@ -52,20 +54,33 @@ const Agenda = () => {
         const [startHours, startMinutes] = event.start_time_event.split(':');
         const startDate = new Date(baseDate.setHours(parseInt(startHours, 10), parseInt(startMinutes, 10), 0, 0));
         const [endHours, endMinutes] = event.end_time_event.split(':');
-        const endDate = new Date(baseDate.setHours(parseInt(endHours, 10), parseInt(endMinutes, 10), 0, 0));
+        const endDate = new Date(baseDate.setHours(parseInt(endHours, 10), parseInt(endMinutes, 10), 0, 0)); // Ajout de l'heure et des minutes
 
         return {
           title: event.id_prestation.title,
-          start: startDate,
-          end: endDate,
+          start: startDate, // Date complète avec l'heure
+          end: endDate, // Date complète avec l'heure
           style: event.id_category.color,
           eventItem: event,
         };
       });
 
-      setEvents(newEvents); // Remplacez directement les anciens événements
+      // Ajouter les nouveaux événements si nécessaire
+      setEvents((prevEvents) => {
+        const updatedEvents = [...prevEvents];
+
+        // Ajouter seulement les événements qui ne sont pas déjà dans l'état
+        newEvents.forEach((newEvent) => {
+          const exists = prevEvents.some((event) => new Date(event.start).getTime() === newEvent.start.getTime() && event.title === newEvent.title);
+          if (!exists) {
+            updatedEvents.push(newEvent);
+          }
+        });
+
+        return updatedEvents;
+      });
     } else {
-      setEvents([]);
+      setEvents([]); // Réinitialiser les événements si aucun n'est disponible
     }
   }, [eventFullCalendar]);
 
@@ -75,20 +90,23 @@ const Agenda = () => {
       const calendarApi = calendarRef.current.getApi();
 
       if (e.key === 'ArrowLeft') {
-        calendarApi.prev();
+        calendarApi.prev(); // Navigate to the previous date
       } else if (e.key === 'ArrowRight') {
-        calendarApi.next();
+        calendarApi.next(); // Navigate to the next date
       }
     };
 
+    // Ajouter un écouteur d'événements pour les touches du clavier
     window.addEventListener('keydown', handleKeyDown);
+
+    // Nettoyer l'écouteur lors du démontage du composant
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
   const dayHeaderContent = (args: { isToday: boolean; text: string }) => {
-    const todayClass = args.isToday ? 'text-brown font-normal' : 'text-inherit font-normal';
+    const todayClass = args.isToday ? 'text-green-600 font-normal' : 'text-inherit font-normal';
 
     return <div className={`h-[60px] w-[200px] flex items-center justify-center ${todayClass}`}>{args.text}</div>;
   };
@@ -114,7 +132,7 @@ const Agenda = () => {
       <FullCalendar
         ref={calendarRef}
         locale={frLocale}
-        plugins={[timeGrid]}
+        plugins={[timeGrid, dayGridPlugin]}
         initialView="timeGridWeek"
         initialDate={currentDate}
         allDaySlot={false}
