@@ -318,7 +318,7 @@ const DialogCreateEvent = () => {
                 {isStripeAccountConnected && isValidStripe && (
                   <div className="flex justify-between items-center mt-4">
                     <label htmlFor="acompte" className="text-lg font-medium text-gray-900">
-                      Montant de l&apos;acompte<span className="text-green-600 font-bold pl-1">*</span>
+                      Montant de l&apos;acompte<span className="text-brown font-bold pl-1">*</span>
                     </label>
                     <input
                       id="acompte"

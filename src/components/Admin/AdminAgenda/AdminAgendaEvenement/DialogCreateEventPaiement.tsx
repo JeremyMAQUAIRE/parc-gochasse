@@ -29,7 +29,7 @@ const DialogCreateEventPaiement = ({ isValidStripe }: DialogCreateEventPaiementP
   return (
     <div className="flex justify-between items-center mt-4">
       <label htmlFor="paiement" className="text-lg font-medium text-gray-900">
-        Paiement <span className="text-green-600 font-bold pl-1">*</span>
+        Paiement <span className="text-brown font-bold pl-1">*</span>
       </label>
 
       {isStripeAccountConnected && isValidStripe ? (
