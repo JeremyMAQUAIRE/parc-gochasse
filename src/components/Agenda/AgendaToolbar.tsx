@@ -52,14 +52,17 @@ const AgendaToolbar = () => {
       <div className="flex items-center gap-3 relative z-50">
         <button
           type="button"
-          className="homeParcAgendaToolbar-content_calendar_button"
+          className="homeParcAgendaToolbar-content_calendar_button disabled:opacity-30"
           onClick={() => {
-            setShowDatePicker(!showDatePicker);
+            if (!dialogOpen.dialogCreateEvent) setShowDatePicker(!showDatePicker);
           }}
-          onKeyDown={handleKeyDown} // Add keyboard event listener
-          tabIndex={0} // Ensure it's focusable via keyboard
+          onKeyDown={(e) => {
+            if (!dialogOpen.dialogCreateEvent) handleKeyDown(e);
+          }}
+          tabIndex={dialogOpen.dialogCreateEvent ? -1 : 0}
+          disabled={dialogOpen.dialogCreateEvent}
         >
-          <img src={calendar} alt="Icone de calendrier" className="w-12 h-12" />
+          <img src={calendar} alt="Icone de calendrier" className="w-12 h-12 opacity-100 disabled:opacity-30" />
         </button>
         {/* DatePicker à côté du bouton du calendrier */}
         {showDatePicker && (
