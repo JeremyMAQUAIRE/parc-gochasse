@@ -35,26 +35,22 @@ const SettingNav = () => {
           >
             <PhoneCall /> Nous contacter
           </NavLink>
-          <NavLink
-            to="condition-general-utilisation"
-            className={({ isActive }) =>
-              isActive
-                ? 'flex h-16 items-center gap-2 pl-4 text-brown font-semibold border-b-[1px] border-black'
-                : 'flex h-16 items-center gap-2 pl-4 border-b-[1px] border-black'
-            }
+          <a
+            href={`https://api.gochasse.com/assets/${import.meta.env.VITE_DIRECTUS_ID_CGU}?download`}
+            className="flex h-16 items-center gap-2 pl-4 border-b-[1px] border-black hover:text-brown"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <Info /> Voir les CGU
-          </NavLink>
-          <NavLink
-            to="condition-general-vente"
-            className={({ isActive }) =>
-              isActive
-                ? 'flex h-16 items-center gap-2 pl-4 text-brown font-semibold border-b-[1px] border-black'
-                : 'flex h-16 items-center gap-2 pl-4 border-b-[1px] border-black'
-            }
+            <Info /> Télécharger les CGU
+          </a>
+          <a
+            href={`https://api.gochasse.com/assets/${import.meta.env.VITE_DIRECTUS_ID_CGV}?download`}
+            className="flex h-16 items-center gap-2 pl-4 border-b-[1px] border-black hover:text-brown"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <Info /> Voir les CGV
-          </NavLink>
+            <Info /> Télécharger les CGV
+          </a>
         </div>
         <div>
           <div className="settingNav-content_item settingNav-content_item_logout">

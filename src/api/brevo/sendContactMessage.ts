@@ -11,7 +11,7 @@ export default createAsyncThunk('FETCH_SEND_VALIDATE_MAIL', async (_, thunkAPI) 
     {
       to: [
         {
-          email: 'readyhunter@hotmail.com',
+          email: 'go.chasse@hotmail.com',
         },
       ],
       templateId: 3,

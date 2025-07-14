@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 
 import SettingNav from './SettingNav';
 import SettingContact from './SettingContact';
-import SettingCgu from './SettingCgu';
+import SettingCgu from './SettingCgu-old';
 import SettingPageGoChasse from './PageGochasse/SettingPageGoChasse';
-import SettingCgv from './SettingCgv';
+import SettingCgv from './SettingCgv-old';
 
 const Setting = () => {
   const navigate = useNavigate();
