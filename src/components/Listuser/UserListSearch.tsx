@@ -29,7 +29,7 @@ const UserListSearch = ({ mailList, setSearch }: IUserListSearch) => {
           href={`mailto:${proMail && proMail.email}?bcc=${mailList.join(';')}`}
           className="flex items-center justify-center gap-4 w-80 py-2 rounded-lg text-white font-semibold bg-zinc-400 hover:scale-110"
         >
-          <Mail className="text-brown" /> Envoyer un mail groupe
+          <Mail className="text-brown" /> Envoyer un e-mail groupé
         </a>
       </div>
     </section>
