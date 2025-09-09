@@ -25,9 +25,13 @@ const DialogCreatePrestation = () => {
   const open = useSelector((state: RootState) => state.dialogReducer.dialogCreatePrestation);
   const prestation = useSelector((state: RootState) => state.prestationReducer);
 
+  const MAX_DESC = 250;
+  const descLen = prestation.description?.length ?? 0;
+
   const disabled =
     prestation.title === '' ||
-    prestation.description === '' ||
+    descLen === 0 ||
+    descLen > MAX_DESC ||
     prestation.startTime === '' ||
     prestation.endTime === '' ||
     prestation.price === 0 ||
@@ -76,8 +80,9 @@ const DialogCreatePrestation = () => {
                   </svg>
                 </button>
               </DialogTitle>
+
               <div className="my-4 w-9/12 m-auto">
-                {/* Titre et Description */}
+                {/* Titre */}
                 <div className="flex justify-between items-center mt-4">
                   <label htmlFor="title" className="text-lg font-medium text-gray-900">
                     Titre <span className="text-brown font-bold pl-1">*</span>
@@ -85,25 +90,40 @@ const DialogCreatePrestation = () => {
                   <input
                     id="title"
                     type="text"
-                    value={prestation.title === '' ? '' : prestation.title}
+                    value={prestation.title ?? ''}
                     onChange={(e) => dispatch(actionChangePrestationTitle(e.target.value))}
                     placeholder="Ex: Entrainement"
                     className="block w-[550px] py-1.5 pl-3 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none border border-gray-300 rounded-md focus:border-brown"
                   />
                 </div>
-                <div className="flex justify-between items-center mt-4">
-                  <label htmlFor="description" className="text-lg font-medium text-gray-900">
+
+                {/* Description avec compteur */}
+                <div className="flex justify-between items-start mt-4">
+                  <label htmlFor="description" className="text-lg font-medium text-gray-900 mt-2">
                     Description <span className="text-brown font-bold pl-1">*</span>
                   </label>
-                  <textarea
-                    id="description"
-                    rows={3}
-                    maxLength={254}
-                    value={prestation.description === '' ? '' : prestation.description}
-                    onChange={(e) => dispatch(actionChangePrestationDescription(e.target.value))}
-                    placeholder="Ex: Battue au sein de la forêt du Puy Bleue"
-                    className="block w-[550px] py-1.5 pl-3 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none border border-gray-300 rounded-md focus:border-brown"
-                  />
+                  <div className="w-[550px]">
+                    <textarea
+                      id="description"
+                      rows={3}
+                      maxLength={MAX_DESC}
+                      value={prestation.description ?? ''}
+                      onChange={(e) => {
+                        const next = (e.target.value || '').slice(0, MAX_DESC);
+                        dispatch(actionChangePrestationDescription(next));
+                      }}
+                      placeholder="Ex: Battue au sein de la forêt du Puy Bleue"
+                      className="block w-full py-1.5 pl-3 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none border border-gray-300 rounded-md focus:border-brown"
+                      aria-describedby="description-counter"
+                    />
+                    <div
+                      id="description-counter"
+                      className={`mt-1 text-right text-sm ${descLen >= MAX_DESC ? 'text-red-600' : 'text-gray-500'}`}
+                      aria-live="polite"
+                    >
+                      {descLen}/{MAX_DESC}
+                    </div>
+                  </div>
                 </div>
 
                 {/* Horaires de début et de fin */}
@@ -111,50 +131,46 @@ const DialogCreatePrestation = () => {
                   <label htmlFor="startTimePickerDialogCreatePrestation" className="text-lg font-medium text-gray-900">
                     Horaire de début <span className="text-brown font-bold pl-1">*</span>
                   </label>
-                  <div>
-                    <DatePicker
-                      id="startTimePickerDialogCreatePrestation"
-                      selected={prestation.startTime ? new Date(`1970-01-01T${prestation.startTime}:00`) : null}
-                      onChange={(time) => {
-                        if (time) {
-                          const timeString = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                          dispatch(actionChangePrestationTimeStart(timeString));
-                        }
-                      }}
-                      showTimeSelect
-                      showTimeSelectOnly
-                      timeIntervals={15}
-                      timeCaption="Heure"
-                      dateFormat="HH:mm"
-                      className="block w-[550px] py-1.5 pl-3 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none border border-gray-300 rounded-md focus:border-brown"
-                    />
-                  </div>
+                  <DatePicker
+                    id="startTimePickerDialogCreatePrestation"
+                    selected={prestation.startTime ? new Date(`1970-01-01T${prestation.startTime}:00`) : null}
+                    onChange={(time) => {
+                      if (time) {
+                        const timeString = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                        dispatch(actionChangePrestationTimeStart(timeString));
+                      }
+                    }}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={15}
+                    timeCaption="Heure"
+                    dateFormat="HH:mm"
+                    className="block w-[550px] py-1.5 pl-3 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none border border-gray-300 rounded-md focus:border-brown"
+                  />
                 </div>
                 <div className="flex justify-between items-center mt-4 dialogCreatePrestation-input">
                   <label htmlFor="endTimePickerDialogCreatePrestation" className="text-lg font-medium text-gray-900">
                     Horaire de fin <span className="text-brown font-bold pl-1">*</span>
                   </label>
-                  <div>
-                    <DatePicker
-                      id="endTimePickerDialogCreatePrestation"
-                      selected={prestation.endTime ? new Date(`1970-01-01T${prestation.endTime}:00`) : null}
-                      onChange={(time) => {
-                        if (time) {
-                          const timeString = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                          dispatch(actionChangePrestationTimeStop(timeString));
-                        }
-                      }}
-                      showTimeSelect
-                      showTimeSelectOnly
-                      timeIntervals={15}
-                      timeCaption="Heure"
-                      dateFormat="HH:mm"
-                      className="block w-[550px] py-1.5 pl-3 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none border border-gray-300 rounded-md focus:border-brown"
-                    />
-                  </div>
+                  <DatePicker
+                    id="endTimePickerDialogCreatePrestation"
+                    selected={prestation.endTime ? new Date(`1970-01-01T${prestation.endTime}:00`) : null}
+                    onChange={(time) => {
+                      if (time) {
+                        const timeString = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                        dispatch(actionChangePrestationTimeStop(timeString));
+                      }
+                    }}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={15}
+                    timeCaption="Heure"
+                    dateFormat="HH:mm"
+                    className="block w-[550px] py-1.5 pl-3 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none border border-gray-300 rounded-md focus:border-brown"
+                  />
                 </div>
 
-                {/* Tarif et applicable sur */}
+                {/* Tarif */}
                 <div className="flex justify-between items-center mt-4">
                   <label htmlFor="price" className="text-lg font-medium text-gray-900">
                     Tarif (en €)<span className="text-brown font-bold pl-1">*</span>
@@ -169,6 +185,8 @@ const DialogCreatePrestation = () => {
                     className="block w-[550px] py-1.5 pl-3 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none border border-gray-300 rounded-md focus:border-brown"
                   />
                 </div>
+
+                {/* Applicable sur */}
                 <div className="flex justify-between items-center mt-4">
                   <label htmlFor="applicable" className="text-lg font-medium text-gray-900">
                     Applicable sur<span className="text-brown font-bold pl-1">*</span>
@@ -189,16 +207,14 @@ const DialogCreatePrestation = () => {
                   </select>
                 </div>
 
-                {/* Limite */}
+                {/* Limites */}
                 <div className="flex justify-between items-center mt-4">
                   <label htmlFor="priceLimit" className="text-lg font-medium text-gray-900">
                     Limite <span className="text-brown font-bold pl-1">*</span>
                   </label>
                   <div className="flex space-x-4">
                     <div className="flex-1 flex items-center">
-                      {/* Icône pour Participant */}
                       <span className="text-gray-500 mr-2">
-                        {/* Icone de participant, remplacez si nécessaire */}
                         <img src={hunter} alt="Participant" className="h-5 w-5" />
                       </span>
                       <input
@@ -206,12 +222,7 @@ const DialogCreatePrestation = () => {
                         type="number"
                         min={0}
                         disabled={prestation.applicableOn !== 'hunter'}
-                        value={(() => {
-                          if (prestation.applicableOn === 'hunter') {
-                            return prestation.numberHunter === 0 ? '' : prestation.numberHunter;
-                          }
-                          return '';
-                        })()}
+                        value={prestation.applicableOn === 'hunter' ? prestation.numberHunter || '' : ''}
                         onChange={(e) => {
                           dispatch(actionChangePrestationNumberHunter(parseInt(e.target.value, 10)));
                         }}
@@ -220,33 +231,26 @@ const DialogCreatePrestation = () => {
                       />
                     </div>
                     <div className="flex-1 flex items-center">
-                      {/* Icône pour Chien */}
                       <span className="text-gray-500 mr-2">
-                        {/* Icone de chien, utilisez une autre icône si vous préférez */}
                         <img src={dog} alt="Chien" className="h-5 w-5" />
                       </span>
                       <input
                         id="priceLimitDog"
                         type="number"
                         min={0}
-                        placeholder="Nbre de Chien"
                         disabled={prestation.applicableOn !== 'dog'}
-                        value={(() => {
-                          if (prestation.applicableOn === 'dog') {
-                            return prestation.numberDog === 0 ? '' : prestation.numberDog;
-                          }
-                          return '';
-                        })()}
+                        value={prestation.applicableOn === 'dog' ? prestation.numberDog || '' : ''}
                         onChange={(e) => {
                           dispatch(actionChangePrestationNumberDog(parseInt(e.target.value, 10)));
                         }}
+                        placeholder="Nbre de Chien"
                         className="block w-[240px] py-1.5 pl-3 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none border border-gray-300 rounded-md focus:border-brown disabled:bg-gray-200"
                       />
                     </div>
                   </div>
                 </div>
 
-                {/* Bouton de validation */}
+                {/* Bouton */}
                 <div className="mt-6 flex justify-end">
                   <button
                     type="button"
